@@ -12,7 +12,6 @@
 | V1.1 | 2022.12.14 | 郭腾达 | 新增系统接口 |
 |      |            |        |              |
 
-[TOC]
 
 
 
@@ -218,7 +217,7 @@ Bundle bundle = resolver.call(uri, Constant.LORA_CONFIG_QUERY_SERVER_NAME, null,
 
 > 返回值示例如下：
 
-```json
+```java
 {
     "servName":"IN865",
     "gatewayID":"24E124FFFEF59D60",
@@ -297,7 +296,7 @@ Bundle bundle = resolver.call(uri, Constant.LORA_CONFIG_QUERY_DATA_RATES, null, 
 
 > 返回值示例如下：
 
-```json
+```java
 {
     "defaultDr":2,
     "datarates":[
@@ -400,7 +399,7 @@ int code = bundle.getInt(Constant.BUNDLE_CODE, -1);
 
 > 注意，示例中的返回值是默认创建不可修改、删除的：
 
-```json
+```java
 {
     "totalCount":8,
     "result":[
@@ -483,7 +482,7 @@ String json = bundle.getString(Constant.BUNDLE_CONTENT);
 
 > 增加profile入参示例：
 
-```json
+```java
 {
     "name":"ClassCB-ABP1",
     "profile":{
@@ -498,7 +497,7 @@ String json = bundle.getString(Constant.BUNDLE_CONTENT);
 
 > 返回示例：
 
-```json
+```java
 {"profileID":"2725d684-7404-4a68-9520-790d366a990b"}
 ```
 
@@ -518,7 +517,7 @@ String json = bundle.getString(Constant.BUNDLE_CONTENT);
 
 > 修改profile示例：
 
-```json
+```java
 {
     "name":"ClassCB-ABP1",
     "profile":{
@@ -598,7 +597,7 @@ String jsonStr = bundle.getString(Constant.BUNDLE_CONTENT);
 
 > 返回值
 
-```
+```java
 {
     "totalCount":2,
     "result":[
@@ -700,7 +699,7 @@ int code = bundle.getInt(Constant.BUNDLE_CODE, -1);
 
 > 返回值json如下：
 
-```json
+```java
 {
     "devTotalCount":3,
     "deviceResult":[
@@ -908,7 +907,7 @@ input.putInt("limit", 10);//一次获取数量
 Bundle bundle = contentResolver.call(uri, Constant.DS_PACKETS_QUERY, null, input);
 ```
 
-```json
+```java
 {"packets":[{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4141465704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:04:09Z","type":"DnUnc","fCnt":6,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"c84067ad","appEUI":"24E124C0002A0001","fPort":"","size":"0","payloadBase64":"","payloadHex":"","enqueue":false,"classType":"Class A"},{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4123548704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:03:52Z","type":"DnUnc","fCnt":5,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"45571d6d","appEUI":"24E124C0002A0001","fPort":"","size":"0","payloadBase64":"","payloadHex":"","enqueue":false,"classType":"Class A"},{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4104450704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:03:32Z","type":"DnUnc","fCnt":4,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"93917b31","appEUI":"24E124C0002A0001","fPort":"","size":"0","payloadBase64":"","payloadHex":"","enqueue":false,"classType":"Class A"},{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4085419704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:03:13Z","type":"DnUnc","fCnt":3,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"b925a4df","appEUI":"24E124C0002A0001","fPort":"","size":"0","payloadBase64":"","payloadHex":"","enqueue":false,"classType":"Class A"},{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4066297704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:02:54Z","type":"DnUnc","fCnt":2,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"2a60be57","appEUI":"24E124C0002A0001","fPort":"","size":"0","payloadBase64":"","payloadHex":"","enqueue":false,"classType":"Class A"},{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4048743704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:02:37Z","type":"DnUnc","fCnt":1,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"5a4018c4","appEUI":"24E124C0002A0001","fPort":"","size":"0","payloadBase64":"","payloadHex":"","enqueue":false,"classType":"Class A"},{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4030668704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:02:19Z","type":"DnUnc","fCnt":0,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"29f58f61","appEUI":"24E124C0002A0001","fPort":"0","size":"16","payloadBase64":"yB38MVqWRwHU8wC6sxHkTg==","payloadHex":"c81dfc315a964701d4f300bab311e44e","enqueue":false,"classType":"Class A"},{"frequency":916800000,"power":"-","immediately":"-","dataRate":"SF10BW125","modulation":"LORA","bandwidth":125,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"376263h2m18s","timestamp":4029668704,"rssi":"-39","loraSNR":"8.0","devEUI":"24E124136C379261","time":"2022-12-08T15:02:18Z","type":"UpUnc","fCnt":1,"devAddr":"060328C3","adr":"true","adrAckReq":"false","ack":"false","mic":"686e44e3","appEUI":"24E124C0002A0001","fPort":"85","size":"6","payloadBase64":"/wv//wEB","payloadHex":"ff0bffff0101","enqueue":false,"classType":"Class A"},{"frequency":923300000,"power":"27","immediately":"false","dataRate":"SF10BW500","modulation":"LORA","bandwidth":500,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"","timestamp":4028904704,"rssi":"-","loraSNR":"-","devEUI":"24E124136C379261","time":"2022-12-08T15:02:13Z","type":"JnAcc","fCnt":0,"devAddr":"060328C3","adr":"-","adrAckReq":"-","ack":"-","mic":"f3a2e77f","appEUI":"24E124C0002A0001","fPort":"-","size":"17","payloadBase64":"IAAAAQMCAcMoAwYIAaNgS4Y=","payloadHex":"20000001030201c32803060801a3604b86","enqueue":false,"classType":"Class A"},{"frequency":916800000,"power":"-","immediately":"-","dataRate":"SF10BW125","modulation":"LORA","bandwidth":125,"spreadFactor":10,"bitRate":0,"codeRate":"4/5","gatewayMac":"24E124FFFEF59D60","timeSinceGPSEpoch":"376263h2m13s","timestamp":4023904704,"rssi":"-41","loraSNR":"8.0","devEUI":"24E124136C379261","time":"2022-12-08T15:02:13Z","type":"JnReq","fCnt":0,"devAddr":"00000000","adr":"-","adrAckReq":"-","ack":"-","mic":"ec323904","appEUI":"24E124C0002A0001","fPort":"-","size":"18","payloadBase64":"AQAqAMAk4SRhkjdsEyThJJ7l","payloadHex":"01002a00c024e1246192376c1324e1249ee5","enqueue":false,"classType":"Class A"}],"totalCount":"10"}
 ```
 
