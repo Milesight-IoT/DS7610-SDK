@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"DeviceUtils","h":"","u":""},{"l":"NfcResult","h":"","u":""},{"l":"UrNfcManager.Progress","h":"","u":""},{"l":"RandomPwd","h":"","u":""},{"l":"UrNfcManager","h":"","u":""},{"l":"所有类","h":"","u":"allclasses-index.html"}]
