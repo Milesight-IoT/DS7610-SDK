@@ -33,7 +33,7 @@ This document describe the API of using NFC to read and write settings of Milesi
 To develop apps for DS7610 relating this feature, please deploy as below steps:
 
 1. Install Android Studio and set up your Android development environment.
-2. Add **DsNfc.arr** under directory /libs
+2. Add **[DsNfc.arr](https://github.com/Milesight-IoT/DS7610-SDK/tree/main/libs)** under directory /libs
 3. Configure build.gradle file under root directory as below:
 
 ```
