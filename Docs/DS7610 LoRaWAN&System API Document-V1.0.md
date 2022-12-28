@@ -1,10 +1,10 @@
 
 
+English | [中文](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS7610%C2%A0LoRaWAN%E5%92%8C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3-v1.0.md)
 
 
 # DS7610 LoRaWAN&System API Document
 
-[TOC]
 
 **Revision History**
 
