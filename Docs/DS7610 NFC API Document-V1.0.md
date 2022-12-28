@@ -5,7 +5,21 @@ English | [中文](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS
 
 # DS7610 NFC API Document
 
+Table of Contents
+=================
 
+* [DS7610 NFC API Document](#ds7610-nfc-api-document)
+   * [1. Introduction](#1-introduction)
+   * [2. Method](#2-method)
+      * [2.1 Initialization](#21-initialization)
+      * [2.2 Operations](#22-operations)
+         * [2.2.1 Power On Device](#221-power-on-device)
+         * [2.2.2 Power Off Device](#222-power-off-device)
+         * [2.2.3 Reset Device](#223-reset-device)
+         * [2.2.4 Reboot Device](#224-reboot-device)
+         * [2.2.5 Read Device](#225-read-device)
+         * [2.2.6 Write Device](#226-write-device)
+         * [2.2.7 Add Device](#227-add-device)
 
 **Revision History**
 
