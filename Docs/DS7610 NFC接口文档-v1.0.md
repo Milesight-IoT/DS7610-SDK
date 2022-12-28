@@ -36,7 +36,7 @@
 
 ### **1.2 导入项目依赖**
 
-在项目的libs目录下添加DsNfc.aar包
+在项目的libs目录下添加[DsNfc.aar](https://github.com/Milesight-IoT/DS7610-SDK/tree/main/libs)包
 
 在项目根目录build.gradle文件里配置 
 
