@@ -1,6 +1,6 @@
 
 
-
+English | [中文](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/%E6%89%A9%E5%B1%95%E5%9D%9E%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3-v1.0.md)
 
 # Docking Station Kit API Document
 

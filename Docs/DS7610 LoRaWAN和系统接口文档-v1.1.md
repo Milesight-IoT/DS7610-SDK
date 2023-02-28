@@ -1,6 +1,6 @@
 
 
-
+[English](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS7610%20LoRaWAN%26System%20API%20Document-V1.1.md) | 中文
 
 # DS7610 LoRaWAN和系统接口文档
 

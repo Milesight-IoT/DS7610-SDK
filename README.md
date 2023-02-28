@@ -8,3 +8,5 @@
 [NFC SDK guide](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS7610%20NFC%20API%20Document-V1.0.md)
 
 [NFC Android Jar file](https://github.com/Milesight-IoT/DS7610-SDK/tree/main/libs)
+
+[Docking station kit SDK guide](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS7610%20Docking%20Station%20Kit%20API%20Document-V1.0.md)
