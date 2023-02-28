@@ -1,5 +1,5 @@
 
-[English](https://github.com/Milesight-IoT/DS7610-SDK/edit/main/Docs/DS7610%20LoRaWAN&System%20API%20Document-V1.0.md) | 中文
+
 
 
 # DS7610 LoRaWAN和系统接口文档
@@ -52,13 +52,29 @@
          * [3.8.3 软件版本](#383-软件版本)
          * [3.8.4 获取USB类型](#384-获取usb类型)
          * [3.8.5 设置USB类型](#385-设置usb类型)
+      * [3.9 灯带设置](#39-灯带设置)
+         * [3.9.1 灯带设置红色](#391-灯带设置红色)
+         * [3.9.2 灯带设置蓝色](#392-灯带设置蓝色)
+         * [3.9.3 灯带设置绿色](#393-灯带设置绿色)
+         * [3.9.4 灯带设置自定义色值](#394-灯带设置自定义色值)
+         * [3.9.5 关闭灯带](#395-关闭灯带)
+         * [3.9.6 设置灯带亮度1](#396-设置灯带亮度1)
+         * [3.9.7 设置灯带亮度2](#397-设置灯带亮度2)
+         * [3.9.8 设置灯带亮度3](#398-设置灯带亮度3)
+      * [3.10 屏幕亮度设置](#310-屏幕亮度设置)
+         * [3.10.1 获取屏幕亮度](#3101-获取屏幕亮度)
+         * [3.10.2 熄屏](#3102-熄屏)
+         * [3.10.3 亮屏](#3103-亮屏)
+      * [3.11 获取产品型号名称](#311-获取产品型号名称)
+
 
 
 <center><big>文档修订记录</big></center>
 
-| 版本 | 变更时间   | 备注 |
-| ---- | ---------- | ---- |
-| V1.0 | 2022.12.19 | 初稿 |
+| 版本 | 变更时间   | 备注                                         |
+| ---- | ---------- | -------------------------------------------- |
+| V1.0 | 2022.12.19 | 初稿                                         |
+| V1.1 | 2023.1.31  | 新增灯带和屏幕亮度设置，支持获取产品型号名称 |
 
 
 
@@ -72,7 +88,9 @@
 
 ### 1.2 导入项目依赖
 
-只要确认DS7610的固件版本是72.0.0.5以上即可，DS系统配置功能使用Android的组件Provider和Receiver来实现，不需要导入外部包，可用结合LoRaWanGateWayDemo来看
+只要确认DS7610的固件版本是72.0.0.5-r2以上即可，DS系统配置功能使用Android的组件Provider和Receiver来实现，不需要导入外部包，LoRa功能可参考LoRaWanGateWayDemo源码。
+
+
 
 ## 2. 实现流程
 
@@ -1035,5 +1053,127 @@ contentResolver.call(uri, Constant.GET_USB_TYPE, null, null);
 
 ```
 contentResolver.call(uri, Constant.SET_USB_TYPE, "false", null);
+```
+
+
+
+### 3.9 灯带设置
+
+> DS7610提供灯带颜色、亮度的设置功能
+
+```java
+public static final String SET_LIGHT_RED = "set_light_red";//设置灯带红色
+public static final String SET_LIGHT_GREEN = "set_light_green";//设置灯带绿色
+public static final String SET_LIGHT_BLUE = "set_light_blue";//设置灯带蓝色
+public static final String SET_LIGHT_WHITE = "set_light_white";//设置灯带白色
+public static final String SET_BRIGHTNESS_CUSTOM = "set_brightness_custom";//设置灯带颜色，色值自定义
+public static final String SET_BRIGHTNESS_1 = "set_brightness_1";//设置屏幕亮度值1
+public static final String SET_BRIGHTNESS_2 = "set_brightness_2";//设置屏幕亮度值2
+public static final String SET_BRIGHTNESS_3 = "set_brightness_3";//设置屏幕亮度值3
+public static final String SET_BRIGHTNESS_4 = "set_brightness_4";//设置屏幕亮度值4
+public static final String SET_BRIGHTNESS_CLOSE = "set_brightness_close";//关闭灯带
+```
+
+#### 3.9.1 灯带设置红色
+
+```java
+contentResolver.call(uri, Constant.SET_LIGHT_RED, null, bundle);
+```
+
+#### 3.9.2 灯带设置蓝色
+
+```java
+contentResolver.call(uri, Constant.SET_LIGHT_BLUE, null, bundle);
+```
+
+#### 3.9.3 灯带设置绿色
+
+```java
+contentResolver.call(uri, Constant.SET_LIGHT_GREEN, null, bundle);
+```
+
+#### 3.9.4 灯带设置自定义色值
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_CUSTOM, "#EE0000", bundle);
+```
+
+>注意：入参必须是#RGB的字符串
+>
+>R：代表红色，值的范围（0x00-0xff），值越大红色颜色深度越深
+>
+>G：代表绿色，值的范围（0x00-0xff），值越大绿色颜色深度越深
+>
+>B：代表蓝色，值的范围（0x00-0xff），值越大蓝色颜色深度越深
+
+#### 3.9.5 关闭灯带
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_CLOSE, null, bundle);
+```
+
+#### 3.9.6 设置灯带亮度1
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_1, null, bundle);
+```
+
+#### 3.9.7 设置灯带亮度2
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_2, null, bundle);
+```
+
+#### 3.9.8 设置灯带亮度3
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_3, null, bundle);
+```
+
+
+
+### 3.10 屏幕亮度设置
+
+```java
+public static final String GET_SCREEN_BRIGHTNESS = "get_screen_brightness";//获取屏幕亮度
+public static final String SET_SCREEN_BRIGHTNESS = "set_screen_brightness";//设置屏幕亮度 屏幕亮度的范围：0 - 255，0亮度最低，255亮度最高
+```
+
+#### 3.10.1 获取屏幕亮度
+
+> 熄屏前调用获取屏幕亮度的接口，获取到屏幕亮度，保存下来，需要亮屏的时候可以设置屏幕亮度
+
+```java
+Bundle resultBundle = contentResolver.call(uri, Constant.GET_SCREEN_BRIGHTNESS, null, bundle);
+String bright = resultBundle.getString(Constant.BUNDLE_CONTENT);
+```
+
+#### 3.10.2 熄屏
+
+>用户若是需要熄屏而不关闭屏幕，可以使用设置屏幕亮度的方法实现熄屏和亮屏功能
+>
+>熄屏前可以先调用获取屏幕亮度的接口获取屏幕亮度，然后设置屏幕亮度为0，亮屏时则可以设置回原先保存的屏幕亮度
+
+```java
+String brightNess = "0";
+contentResolver.call(uri, Constant.SET_SCREEN_BRIGHTNESS, brightNess, bundle);
+```
+
+#### 3.10.3 亮屏
+
+> 通过设置屏幕熄屏前的屏幕亮度实现亮屏效果
+
+```java
+contentResolver.call(uri, Constant.SET_SCREEN_BRIGHTNESS, brightNess, bundle);
+```
+
+
+
+### 3.11 获取产品型号名称
+
+>获取产品型号名称
+
+```java
+String productname = SystemProperties.get("ro.myproduct.model");
 ```
 

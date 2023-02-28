@@ -1,6 +1,5 @@
 
 
-English | [中文](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS7610%C2%A0LoRaWAN%E5%92%8C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3-v1.0.md)
 
 
 # DS7610 LoRaWAN&System API Document
@@ -50,12 +49,27 @@ English | [中文](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS
          * [3.8.3 Get Firmware Version](#383-get-firmware-version)
          * [3.8.4 Get USB Type](#384-get-usb-type)
          * [3.8.5 Set USB Type](#385-set-usb-type)
+      * [3.9 Light Strip Setting](#39-light-strip-setting)
+         * [3.9.1 Set Light Strip as Red](#391-set-light-strip-as-red)
+         * [3.9.2 Set Light Strip as Blue](#392-set-light-strip-as-blue)
+         * [3.9.3 Set Light Strip as Green](#393-set-light-strip-as-green)
+         * [3.9.4 Set Light Strip as Custom Color](#394-set-light-strip-as-custom-color)
+         * [3.9.5 Turn off Light Strip](#395-turn-off-light-strip)
+         * [3.9.6 Set Light Level 1](#396-set-light-level-1)
+         * [3.9.7 Set Light Level 2](#397-set-light-level-2)
+         * [3.9.8 Set Light Level 3](#398-set-light-level-3)
+      * [3.10 Screen Light Settings](#310-screen-light-settings)
+         * [3.10.1 Get Screen Light Level](#3101-get-screen-light-level)
+         * [3.10.2 Screen Dimmed](#3102-screen-dimmed)
+         * [3.10.3 Screen On](#3103-screen-on)
+      * [3.11 Get Model Name](#311-get-model-name)
 
 **Revision History**
 
-| Date       | Doc Version | Description     |
-| ---------- | ----------- | --------------- |
-| 2022.12.19 | V1.0        | Initial Version |
+| Date       | Doc Version | Description                                                  |
+| ---------- | ----------- | ------------------------------------------------------------ |
+| 2022.12.19 | V1.0        | Initial Version                                              |
+| 2023.1.31  | V1.1        | Add light strip settings, screen light settings and obtain model name |
 
 
 
@@ -70,7 +84,7 @@ For other standard APIs please refer to Android official developer guide: https:
 
 To develop apps for DS7610, please install Android Studio and set up your Android development environment. There is no need to install SDK and please ensure below system requirements:
 
-- DS7610 firmware version (Builder number): 72.0.0.5 and later
+- DS7610 firmware version (Builder number): 72.0.0.5-r2 and later
 
 
 
@@ -1089,3 +1103,138 @@ contentResolver.call(uri, Constant.SET_USB_TYPE, "false", null);
 "true"——Host
 
 "false"——OTG
+
+
+
+### 3.9 Light Strip Setting
+
+DS7610 provides API to configure the color and light level of front and back light strips.
+
+```java
+public static final String SET_LIGHT_RED = "set_light_red";//Set light strip as red
+public static final String SET_LIGHT_GREEN = "set_light_green";//Set light strip as green
+public static final String SET_LIGHT_BLUE = "set_light_blue";//Set light strip as blue
+public static final String SET_LIGHT_WHITE = "set_light_white";//Set light strip as white
+public static final String SET_BRIGHTNESS_CUSTOM = "set_brightness_custom";//Set light strip as custom color
+public static final String SET_BRIGHTNESS_1 = "set_brightness_1";//Set light light level 1
+public static final String SET_BRIGHTNESS_2 = "set_brightness_2";//Set light light level 2
+public static final String SET_BRIGHTNESS_3 = "set_brightness_3";//Set light light level 3
+public static final String SET_BRIGHTNESS_4 = "set_brightness_4";//Set light light level 4
+public static final String SET_BRIGHTNESS_CLOSE = "set_brightness_close";//Turn off light strip
+```
+
+#### 3.9.1 Set Light Strip as Red
+
+```java
+contentResolver.call(uri, Constant.SET_LIGHT_RED, null, bundle);
+```
+
+
+
+#### 3.9.2 Set Light Strip as Blue
+
+```java
+contentResolver.call(uri, Constant.SET_LIGHT_BLUE, null, bundle);
+```
+
+
+
+#### 3.9.3 Set Light Strip as Green
+
+```java
+contentResolver.call(uri, Constant.SET_LIGHT_GREEN, null, bundle);
+```
+
+
+
+#### 3.9.4 Set Light Strip as Custom Color
+
+The input parameter should be RGB strings.
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_CUSTOM, "#EE0000", bundle);
+```
+
+
+
+#### 3.9.5 Turn off Light Strip
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_CLOSE, null, bundle);
+```
+
+
+
+#### 3.9.6 Set Light Level 1
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_1, null, bundle);
+```
+
+
+
+#### 3.9.7 Set Light Level 2
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_2, null, bundle);
+```
+
+
+
+#### 3.9.8 Set Light Level 3
+
+```java
+contentResolver.call(uri, Constant.SET_BRIGHTNESS_3, null, bundle);
+```
+
+
+
+### 3.10 Screen Light Settings
+
+Users can get the screen light level when screen is on, then turn on or off the screen by adjusting the light level.
+
+```java
+public static final String GET_SCREEN_BRIGHTNESS = "get_screen_brightness";//Get screen light level
+public static final String SET_SCREEN_BRIGHTNESS = "set_screen_brightness";//Set screen light level as 0 to 255
+```
+
+
+
+#### 3.10.1 Get Screen Light Level
+
+Get the light level of screen before it dimmed.
+
+```java
+Bundle resultBundle = contentResolver.call(uri, Constant.GET_SCREEN_BRIGHTNESS, null, bundle);
+String bright = resultBundle.getString(Constant.BUNDLE_CONTENT);
+```
+
+#### 3.10.2 Screen Dimmed
+
+Set the light level of screen as 0.
+
+```java
+String brightNess = "0";
+contentResolver.call(uri, Constant.SET_SCREEN_BRIGHTNESS, brightNess, bundle);
+```
+
+#### 3.10.3 Screen On
+
+Get the light level before screen off and set this light level to achieve the screen on.
+
+```java
+contentResolver.call(uri, Constant.SET_SCREEN_BRIGHTNESS, brightNess, bundle);
+```
+
+
+
+### 3.11 Get Model Name
+
+Get the device model name.
+
+```java
+String productname = SystemProperties.get("ro.myproduct.model");
+```
+
+### 
+
