@@ -1,68 +1,10 @@
 
 
-English | [中文](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS7610%C2%A0LoRaWAN%E5%92%8C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3-v1.1.md)
+
 
 # DS7610 LoRaWAN&System API Document
 
-* [DS7610 LoRaWAN&amp;System API Document](#ds7610-lorawansystem-api-document)
-   * [1. Introduction](#1-introduction)
-   * [2. Method](#2-method)
-      * [2.1 Active Call](#21-active-call)
-         * [2.1.1 Basic Method](#211-basic-method)
-         * [2.1.2 Constant](#212-constant)
-      * [2.2 Subscription](#22-subscription)
-   * [3. API](#3-api)
-      * [3.1 LoRaWAN Gateway](#31-lorawan-gateway)
-         * [3.1.1 Enable Gateway](#311-enable-gateway)
-         * [3.1.2 Disable Gateway](#312-disable-gateway)
-         * [3.1.3 Get Enable State](#313-get-enable-state)
-         * [3.1.4 Get Running State](#314-get-running-state)
-         * [3.1.5 Get Gateway Configuration](#315-get-gateway-configuration)
-         * [3.1.6 Get LoRaWAN Frequency List](#316-get-lorawan-frequency-list)
-         * [3.1.7 Get LoRaWAN Datarate List](#317-get-lorawan-datarate-list)
-         * [3.1.8 Set Gateway Configuration](#318-set-gateway-configuration)
-      * [3.2 Profile](#32-profile)
-         * [3.2.1 Get Profile](#321-get-profile)
-         * [3.2.2 Add Profile](#322-add-profile)
-         * [3.2.3 Modify Profile](#323-modify-profile)
-         * [3.2.4 Delete profile](#324-delete-profile)
-      * [3.3 Multicast](#33-multicast)
-         * [3.3.1 Introduction](#331-introduction)
-         * [3.3.2 Add Multicast Group](#332-add-multicast-group)
-         * [3.3.3 Get Multicast Group](#333-get-multicast-group)
-         * [3.3.4 Modify Multicast Group](#334-modify-multicast-group)
-         * [3.3.5 Delete Multicast Group](#335-delete-multicast-group)
-      * [3.4 Device](#34-device)
-         * [3.4.1 Get Device](#341-get-device)
-         * [3.4.2 Add Device](#342-add-device)
-            * [3.4.2.1 Add by Device EUI](#3421-add-by-device-eui)
-            * [3.4.2.2 Add by Multiple Parameters](#3422-add-by-multiple-parameters)
-            * [3.4.2.3 Add by NFC](#3423-add-by-nfc)
-         * [3.4.3 Modify Device](#343-modify-device)
-         * [3.4.4 Delete Device](#344-delete-device)
-      * [3.5 Get Packet](#35-get-packet)
-      * [3.6 Send Downlink](#36-send-downlink)
-      * [3.7 Send Multicast Downlink](#37-send-multicast-downlink)
-      * [3.8 System Settings](#38-system-settings)
-         * [3.8.1 Get Hardware Version](#381-get-hardware-version)
-         * [3.8.2 Get Serial Number](#382-get-serial-number)
-         * [3.8.3 Get Firmware Version](#383-get-firmware-version)
-         * [3.8.4 Get USB Type](#384-get-usb-type)
-         * [3.8.5 Set USB Type](#385-set-usb-type)
-      * [3.9 Light Strip Setting](#39-light-strip-setting)
-         * [3.9.1 Set Light Strip as Red](#391-set-light-strip-as-red)
-         * [3.9.2 Set Light Strip as Blue](#392-set-light-strip-as-blue)
-         * [3.9.3 Set Light Strip as Green](#393-set-light-strip-as-green)
-         * [3.9.4 Set Light Strip as Custom Color](#394-set-light-strip-as-custom-color)
-         * [3.9.5 Turn off Light Strip](#395-turn-off-light-strip)
-         * [3.9.6 Set Light Level 1](#396-set-light-level-1)
-         * [3.9.7 Set Light Level 2](#397-set-light-level-2)
-         * [3.9.8 Set Light Level 3](#398-set-light-level-3)
-      * [3.10 Screen Light Settings](#310-screen-light-settings)
-         * [3.10.1 Get Screen Light Level](#3101-get-screen-light-level)
-         * [3.10.2 Screen Dimmed](#3102-screen-dimmed)
-         * [3.10.3 Screen On](#3103-screen-on)
-      * [3.11 Get Model Name](#311-get-model-name)
+[TOC]
 
 **Revision History**
 
@@ -70,6 +12,8 @@ English | [中文](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS
 | ---------- | ----------- | ------------------------------------------------------------ |
 | 2022.12.19 | V1.0        | Initial Version                                              |
 | 2023.1.31  | V1.1        | Add light strip settings, screen light settings and obtain model name |
+| 2023.3.3   | V1.2        | Support platform integration with Milesight IoT Cloud or Yeastar Workplace Platform, obtain OEM ID |
+| 2023.6.26  | V1.3        | Support to get or set password of Yeastar Workplace Platform |
 
 
 
@@ -84,7 +28,7 @@ For other standard APIs please refer to Android official developer guide: https:
 
 To develop apps for DS7610, please install Android Studio and set up your Android development environment. There is no need to install SDK and please ensure below system requirements:
 
-- DS7610 firmware version (Builder number): 72.0.0.5-r2 and later
+- DS7610 firmware version (Builder number): 72.0.0.5-r4 and later
 
 
 
@@ -295,18 +239,28 @@ Bundle bundle = resolver.call(uri, Constant.LORA_CONFIG_QUERY_SERVER_NAME, null,
         "RU864"
     ],
     "serverAddress":"Embeded Network Server",
-    "rxDataRate":1
+    "rxDataRate":1,
+    "cloudConfig":{
+        "enable": false,
+        "platform": "",
+        "url": ""
+        "password": ""
+    }
 }
 ```
 
-| Name          | Property   | Description                                    |
-| ------------- | ---------- | ---------------------------------------------- |
-| gatewayID     | R string   | Gateway EUI, read-only                         |
-| servName      | R/W string | Frequency Channel Plan                         |
-| rxFrequence   | R/W int    | Frequency                                      |
-| rxDataRate    | R/W int    | Datarate (DR)                                  |
-| servNames     | R string   | Get optional frequency channel plan, read-only |
-| serverAddress | R/W string | It's fixed as embedded network server          |
+| Name          | Property   | Description                                           |
+| ------------- | ---------- | ----------------------------------------------------- |
+| gatewayID     | R string   | Gateway EUI, read-only                                |
+| servName      | R/W string | Frequency Channel Plan                                |
+| rxFrequence   | R/W int    | Frequency                                             |
+| rxDataRate    | R/W int    | Datarate (DR)                                         |
+| servNames     | R string   | Get optional frequency channel plan, read-only        |
+| serverAddress | R/W string | It's fixed as embedded network server                 |
+| enable        | R/W bool   | Whether platform mode is enabled                      |
+| platform      | R/W string | platform mode,  iot-cloud or smart-office is optional |
+| url           | R/W string | Platform address when platform mode is smart-office   |
+| password      | R/W string | Yeastar Workplace platform password                   |
 
 #### 3.1.6 Get LoRaWAN Frequency List
 
@@ -409,16 +363,24 @@ int updateCode = updateBundle.getInt(Constant.BUNDLE_CODE, -1);
     "gatewayID": "24E124FFFEF59F32",
     "rxFrequence": 868100000,
     "rxDataRate": 4,
-    "servName": "EU868"
+    "servName": "EU868",
+    "cloudEnable": true,
+    "cloudPlatform": "smart-office",
+    "cloudUrl": ""
+    "cloudPassword": ""
 }
 ```
 
-| Name        | Property   | Description            |
-| ----------- | ---------- | ---------------------- |
-| gatewayID   | R string   | Gateway EUI, read-only |
-| servName    | R/W string | Channel plan           |
-| rxFrequence | R/W int    | Frequency              |
-| rxDataRate  | R/W int    | Datarate (DR)          |
+| Name          | Property   | Description                                                  |
+| ------------- | ---------- | ------------------------------------------------------------ |
+| gatewayID     | R string   | Gateway EUI, read-only                                       |
+| servName      | R/W string | Channel plan                                                 |
+| rxFrequence   | R/W int    | Frequency                                                    |
+| rxDataRate    | R/W int    | Datarate (DR)                                                |
+| cloudEnable   | R/W bool   | Enable or disable platform mode                              |
+| cloudPlatform | R/W string | iot-cloud or smart-office is optional; when using iot-cloud mode, there is not need to add devices or profiles on DS7610 |
+| cloudUrl      | R/W string | platform address when platform mode is smart-office, left blank means Yeastar Workplace cloud platform |
+| cloudPassword | R/W string | Yeastar Workplace platform password                          |
 
 
 
@@ -1236,5 +1198,17 @@ Get the device model name.
 String productname = SystemProperties.get("ro.myproduct.model");
 ```
 
+
+
+### 3.12 Get OEM ID
+
+Get the device OEM ID.
+
+```java
+String productname = SystemProperties.get("ro.ms.oem2");
+```
+
 ### 
+
+
 

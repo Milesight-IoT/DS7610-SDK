@@ -1,80 +1,21 @@
 
 
-[English](https://github.com/Milesight-IoT/DS7610-SDK/blob/main/Docs/DS7610%20LoRaWAN%26System%20API%20Document-V1.1.md) | 中文
+
 
 # DS7610 LoRaWAN和系统接口文档
 
-* [DS7610 LoRaWAN和系统接口文档](#ds7610-lorawan和系统接口文档)
-   * [1.前提条件](#1前提条件)
-      * [1.1 部署Android开发环境](#11-部署android开发环境)
-      * [1.2 导入项目依赖](#12-导入项目依赖)
-   * [2. 实现流程](#2-实现流程)
-      * [2.1 主动调用](#21-主动调用)
-         * [2.1.1 基本的调用方式](#211-基本的调用方式)
-         * [2.1.2 主动调用的常量](#212-主动调用的常量)
-      * [2.2 订阅](#22-订阅)
-   * [3. 接口实现](#3-接口实现)
-      * [3.1 LoRa系统设置](#31-lora系统设置)
-         * [3.1.1 启用LoRa网关](#311-启用lora网关)
-         * [3.1.2 禁用LoRa网关](#312-禁用lora网关)
-         * [3.1.3 获取LoRa网关的可用状态](#313-获取lora网关的可用状态)
-         * [3.1.4 获取LoRa网关的运行状态](#314-获取lora网关的运行状态)
-         * [3.1.5 LoRa频段参数](#315-lora频段参数)
-         * [3.1.6 LoRa频率列表](#316-lora频率列表)
-         * [3.1.7 LoRa速率列表](#317-lora速率列表)
-         * [3.1.8 LoRa设置更新](#318-lora设置更新)
-      * [3.2 profile设置](#32-profile设置)
-         * [3.2.1 profile查询](#321-profile查询)
-         * [3.2.2 增加profile](#322-增加profile)
-         * [3.2.3 修改profile](#323-修改profile)
-         * [3.2.4 删除profile](#324-删除profile)
-      * [3.3 组播设置](#33-组播设置)
-         * [3.3.1 组播概览](#331-组播概览)
-         * [3.3.2 新增组播](#332-新增组播)
-         * [3.3.3 查询组播](#333-查询组播)
-         * [3.3.4 修改组播](#334-修改组播)
-         * [3.3.5 删除组播](#335-删除组播)
-      * [3.4 节点设置](#34-节点设置)
-         * [3.4.1 节点概览](#341-节点概览)
-         * [3.4.2 查询节点](#342-查询节点)
-         * [3.4.3 新增节点](#343-新增节点)
-            * [3.4.3.1 通过EUI添加节点设备](#3431-通过eui添加节点设备)
-            * [3.4.3.2 多参数添加节点设备](#3432-多参数添加节点设备)
-            * [3.4.3.3 NFC添加节点设备](#3433-nfc添加节点设备)
-         * [3.4.4 修改节点](#344-修改节点)
-         * [3.4.5 删除节点](#345-删除节点)
-      * [3.5 数据查看](#35-数据查看)
-      * [3.6 下行指令发送](#36-下行指令发送)
-      * [3.7 组播指令发送](#37-组播指令发送)
-      * [3.8 系统设置](#38-系统设置)
-         * [3.8.1 硬件版本](#381-硬件版本)
-         * [3.8.2 SN](#382-sn)
-         * [3.8.3 软件版本](#383-软件版本)
-         * [3.8.4 获取USB类型](#384-获取usb类型)
-         * [3.8.5 设置USB类型](#385-设置usb类型)
-      * [3.9 灯带设置](#39-灯带设置)
-         * [3.9.1 灯带设置红色](#391-灯带设置红色)
-         * [3.9.2 灯带设置蓝色](#392-灯带设置蓝色)
-         * [3.9.3 灯带设置绿色](#393-灯带设置绿色)
-         * [3.9.4 灯带设置自定义色值](#394-灯带设置自定义色值)
-         * [3.9.5 关闭灯带](#395-关闭灯带)
-         * [3.9.6 设置灯带亮度1](#396-设置灯带亮度1)
-         * [3.9.7 设置灯带亮度2](#397-设置灯带亮度2)
-         * [3.9.8 设置灯带亮度3](#398-设置灯带亮度3)
-      * [3.10 屏幕亮度设置](#310-屏幕亮度设置)
-         * [3.10.1 获取屏幕亮度](#3101-获取屏幕亮度)
-         * [3.10.2 熄屏](#3102-熄屏)
-         * [3.10.3 亮屏](#3103-亮屏)
-      * [3.11 获取产品型号名称](#311-获取产品型号名称)
+[TOC]
 
 
 
 <center><big>文档修订记录</big></center>
 
-| 版本 | 变更时间   | 备注                                         |
-| ---- | ---------- | -------------------------------------------- |
-| V1.0 | 2022.12.19 | 初稿                                         |
-| V1.1 | 2023.1.31  | 新增灯带和屏幕亮度设置，支持获取产品型号名称 |
+| 版本 | 变更时间   | 备注                                                         |
+| ---- | ---------- | ------------------------------------------------------------ |
+| V1.0 | 2022.12.19 | 初稿                                                         |
+| V1.1 | 2023.1.31  | 新增灯带和屏幕亮度设置，支持获取产品型号名称                 |
+| V1.2 | 2023.3.3   | 新增集成模式支持集成星纵云和Yeastar智慧办公平台，支持获取OEM ID |
+| V1.3 | 2023.6.26  | 新增集成模式为Yeastar智慧办公平台时，支持设置密码            |
 
 
 
@@ -88,7 +29,7 @@
 
 ### 1.2 导入项目依赖
 
-只要确认DS7610的固件版本是72.0.0.5-r2以上即可，DS系统配置功能使用Android的组件Provider和Receiver来实现，不需要导入外部包，LoRa功能可参考LoRaWanGateWayDemo源码。
+只要确认DS7610的固件版本是72.0.0.5-r4以上即可，DS系统配置功能使用Android的组件Provider和Receiver来实现，不需要导入外部包，LoRa功能可参考LoRaWanGateWayDemo源码。
 
 
 
@@ -293,7 +234,13 @@ Bundle bundle = resolver.call(uri, Constant.LORA_CONFIG_QUERY_SERVER_NAME, null,
         "RU864"
     ],
     "serverAddress":"Embeded Network Server",
-    "rxDataRate":1
+    "rxDataRate":1,
+    "cloudConfig":{
+        "enable": false,
+        "platform": "",
+        "url": ""
+        "password": ""
+    }
 }
 ```
 
@@ -305,6 +252,10 @@ Bundle bundle = resolver.call(uri, Constant.LORA_CONFIG_QUERY_SERVER_NAME, null,
 | rxDataRate    | R/W int    | 速率                                       |
 | servNames     | R string   | 只读，当前可选频段信息，获取频段信息时返回 |
 | serverAddress | R/W string | 当前只支持内置NS `Embeded Network Server`  |
+| enable        | R/W bool   | 集成接口是否开启                           |
+| platform      | R/W string | 集成模式，可选 iot-cloud, smart-office     |
+| url           | R/W string | 服务器地址                                 |
+| password      | R/W string | 集成模式为smart-office时的密码             |
 
 #### 3.1.6 LoRa频率列表
 
@@ -405,7 +356,11 @@ int updateCode = updateBundle.getInt(Constant.BUNDLE_CODE, -1);
     "gatewayID": "24E124FFFEF59F32",
     "rxFrequence": 868100000,
     "rxDataRate": 4,
-    "servName": "EU868"
+    "servName": "EU868",
+    "cloudEnable": true,
+    "cloudPlatform": "smart-office",
+    "cloudUrl": ""
+    "cloudPassword": ""
 }
 ```
 
@@ -413,12 +368,16 @@ int updateCode = updateBundle.getInt(Constant.BUNDLE_CODE, -1);
 
 > 其中servNameVo的参数如下：
 
-| 接口参数    | SDK选项    | 备注                 |
-| ----------- | ---------- | -------------------- |
-| gatewayID   | R string   | 只读信息，gatewayEUI |
-| servName    | R/W string | 频段信息             |
-| rxFrequence | R/W int    | 频率                 |
-| rxDataRate  | R/W int    | 速率与扩频因子       |
+| 接口参数      | SDK选项    | 备注                                                         |
+| ------------- | ---------- | ------------------------------------------------------------ |
+| gatewayID     | R string   | 只读信息，gatewayEUI                                         |
+| servName      | R/W string | 频段信息                                                     |
+| rxFrequence   | R/W int    | 频率                                                         |
+| rxDataRate    | R/W int    | 速率与扩频因子                                               |
+| cloudEnable   | R/W bool   | 是否启用集成接口                                             |
+| cloudPlatform | R/W string | 集成模式，可选 iot-cloud, smart-office; 使用iot-cloud模式时无需在设备上添加profile和设备 |
+| cloudUrl      | R/W string | 服务器地址，仅集成模式为smart-office时可选填写，为空时表示Yeastar智慧办公云平台 |
+| cloudPassword | R/W string | 集成模式为smart-office时可填写                               |
 
 ### 3.2 profile设置
 
@@ -1176,4 +1135,16 @@ contentResolver.call(uri, Constant.SET_SCREEN_BRIGHTNESS, brightNess, bundle);
 ```java
 String productname = SystemProperties.get("ro.myproduct.model");
 ```
+
+
+
+### 3.12 获取产品OEM ID
+
+>获取产品OEM ID
+
+```java
+String productname = SystemProperties.get("ro.ms.oem2");
+```
+
+
 
